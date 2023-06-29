@@ -49,6 +49,9 @@ public class Model {
 
                 List<People> giocatori1 = this.annoToPlayers.get(vertici.get(i));
                 List<People> giocatori2 = this.annoToPlayers.get(vertici.get(j));
+                
+                double peso1 = getAvgWeight(giocatori1);
+                double peso2 = getAvgWeight(giocatori2);
 
                 double peso = Math.abs(getAvgWeight(giocatori1) - getAvgWeight(giocatori2));
                 Graphs.addEdgeWithVertices(this.grafo, vertici.get(i), vertici.get(j), peso);
@@ -68,6 +71,8 @@ public class Model {
         return sumWeights/giocatori.size();
     }
 
+    
+    
 
     public Set<Integer> getVertici(){
         return this.grafo.vertexSet();
@@ -84,7 +89,7 @@ public class Model {
 
         for(Integer nodo : adiacenti) {
             DefaultWeightedEdge arco = this.grafo.getEdge(anno, nodo);
-            result.add(new Dettaglio(nodo, (int)this.grafo.getEdgeWeight(arco)) );
+            result.add(new Dettaglio(nodo, this.grafo.getEdgeWeight(arco)) );
         }
         Collections.sort(result);
         return result;

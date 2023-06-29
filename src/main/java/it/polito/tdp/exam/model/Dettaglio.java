@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Dettaglio implements Comparable<Dettaglio>{
 
     private Integer anno;
-    private Integer peso;
+    private Double peso;
 
-    public Dettaglio(Integer anno, Integer peso) {
+    public Dettaglio(Integer anno, Double peso) {
         super();
         this.anno = anno;
         this.peso = peso;
@@ -21,11 +21,11 @@ public class Dettaglio implements Comparable<Dettaglio>{
         this.anno = anno;
     }
 
-    public Integer getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(Integer peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
@@ -53,7 +53,7 @@ public class Dettaglio implements Comparable<Dettaglio>{
 
     @Override
     public int compareTo(Dettaglio o) {
-        return -(this.peso-o.peso);
+        return -(int)(this.peso-o.peso);
     }
 
 

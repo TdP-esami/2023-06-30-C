@@ -129,9 +129,9 @@ public class BaseballDAO {
 
 	public List<People> getPlayersTeamYear(String name, int anno){
 		String sql = "SELECT people.* "
-				+ "FROM people, salaries, teams "
-				+ "WHERE people.playerID=salaries.playerID "
-				+ "AND salaries.teamID=teams.ID "
+				+ "FROM people, appearances, teams "
+				+ "WHERE people.playerID=appearances.playerID "
+				+ "AND appearances.teamID=teams.ID "
 				+ "AND teams.year=? "
 				+ "AND teams.name=?";
 		List<People> result = new ArrayList<People>();

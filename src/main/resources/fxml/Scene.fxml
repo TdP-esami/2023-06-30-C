@@ -15,7 +15,7 @@
 
 <BorderPane prefHeight="620.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.exam.FXMLController">
    <top>
-      <Label text="Esame 30/06/2023 - Turno A" BorderPane.alignment="CENTER">
+      <Label text="Esame 30/06/2023 - Turno C" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
