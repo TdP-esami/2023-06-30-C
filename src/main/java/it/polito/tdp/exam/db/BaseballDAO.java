@@ -68,13 +68,106 @@ public class BaseballDAO {
 		}
 	}
 
+
+
+
+
+	public List<String> getTeamsNames(){
+		String sql = "SELECT DISTINCT name "
+				+ "FROM teams "
+				+ "ORDER BY name ASC";
+		List<String> result = new ArrayList<String>();
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				result.add(new String(rs.getString("name")));
+			}
+
+
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+
+
+	public List<Integer> getVertici(String name){
+		String sql = "SELECT distinct year "
+				+ "FROM teams "
+				+ "WHERE name = ? "
+				+ "ORDER BY year ASC";
+		List<Integer> result = new ArrayList<Integer>();
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, name);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				result.add(rs.getInt("year"));
+			}
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+
+
+
+	public List<People> getPlayersTeamYear(String name, int anno){
+		String sql = "SELECT people.* "
+				+ "FROM people, salaries, teams "
+				+ "WHERE people.playerID=salaries.playerID "
+				+ "AND salaries.teamID=teams.ID "
+				+ "AND teams.year=? "
+				+ "AND teams.name=?";
+		List<People> result = new ArrayList<People>();
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, anno);
+			st.setString(2, name);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				result.add(new People(rs.getString("playerID"), rs.getString("birthCountry"), rs.getString("birthCity"),
+						rs.getString("deathCountry"), rs.getString("deathCity"), rs.getString("nameFirst"),
+						rs.getString("nameLast"), rs.getInt("weight"), rs.getInt("height"), rs.getString("bats"),
+						rs.getString("throws"), getBirthDate(rs), getDebutDate(rs), getFinalGameDate(rs),
+						getDeathDate(rs)));
+			}
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+
+
 	// =================================================================
 	// ==================== HELPER FUNCTIONS =========================
 	// =================================================================
 
 	/**
 	 * Helper function per leggere le date e gestire quando sono NULL
-	 * 
+	 *
 	 * @param rs
 	 * @return
 	 */
@@ -95,7 +188,7 @@ public class BaseballDAO {
 
 	/**
 	 * Helper function per leggere le date e gestire quando sono NULL
-	 * 
+	 *
 	 * @param rs
 	 * @return
 	 */
@@ -116,7 +209,7 @@ public class BaseballDAO {
 
 	/**
 	 * Helper function per leggere le date e gestire quando sono NULL
-	 * 
+	 *
 	 * @param rs
 	 * @return
 	 */
@@ -137,7 +230,7 @@ public class BaseballDAO {
 
 	/**
 	 * Helper function per leggere le date e gestire quando sono NULL
-	 * 
+	 *
 	 * @param rs
 	 * @return
 	 */
