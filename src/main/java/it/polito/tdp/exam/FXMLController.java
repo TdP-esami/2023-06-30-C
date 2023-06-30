@@ -66,7 +66,7 @@ public class FXMLController {
         Set<DefaultWeightedEdge> archi = this.model.getArchi();
         this.txtResult.setText("Grafo creato\n");
         this.txtResult.appendText("#Vertici: " + vertici.size() + "\n");
-        this.txtResult.appendText("#Vertici: " + archi.size() + "\n");
+        this.txtResult.appendText("#Archi: " + archi.size() + "\n");
 
         this.cmbAnno.getItems().clear();
         this.cmbAnno.getItems().addAll( vertici );
