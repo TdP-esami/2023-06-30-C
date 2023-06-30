@@ -53,7 +53,8 @@ public class Dettaglio implements Comparable<Dettaglio>{
 
     @Override
     public int compareTo(Dettaglio o) {
-        return -(int)(this.peso-o.peso);
+        //return -(int)(this.peso-o.peso);
+        return Double.compare(o.peso, this.peso);
     }
 
 
